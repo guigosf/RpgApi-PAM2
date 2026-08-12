@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7ihxYyhVSWw=",
+  "dgSpecHash": "Zg2t/7/iAXs=",
   "success": true,
-  "projectFilePath": "D:\\Guilherme\\Pam\\RpgApi\\RpgApi.csproj",
+  "projectFilePath": "D:\\Guilherme\\PamII Luiz\\RpgApi\\RpgApi.csproj",
   "expectedPackageFiles": [
     "D:\\NUGET_PACKAGES\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "D:\\NUGET_PACKAGES\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -62,9 +62,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
-      "projectPath": "D:\\Guilherme\\Pam\\RpgApi\\RpgApi.csproj",
+      "projectPath": "D:\\Guilherme\\PamII Luiz\\RpgApi\\RpgApi.csproj",
       "warningLevel": 1,
-      "filePath": "D:\\Guilherme\\Pam\\RpgApi\\RpgApi.csproj",
+      "filePath": "D:\\Guilherme\\PamII Luiz\\RpgApi\\RpgApi.csproj",
       "libraryId": "Microsoft.OpenApi",
       "targetGraphs": [
         "net10.0"

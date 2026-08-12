@@ -3295,11 +3295,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Guilherme\\Pam\\RpgApi\\RpgApi.csproj",
+      "projectUniqueName": "D:\\Guilherme\\PamII Luiz\\RpgApi\\RpgApi.csproj",
       "projectName": "RpgApi",
-      "projectPath": "D:\\Guilherme\\Pam\\RpgApi\\RpgApi.csproj",
+      "projectPath": "D:\\Guilherme\\PamII Luiz\\RpgApi\\RpgApi.csproj",
       "packagesPath": "D:\\NUGET_PACKAGES",
-      "outputPath": "D:\\Guilherme\\Pam\\RpgApi\\obj\\",
+      "outputPath": "D:\\Guilherme\\PamII Luiz\\RpgApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

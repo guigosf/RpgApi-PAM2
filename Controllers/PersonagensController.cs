@@ -11,10 +11,12 @@ using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using RpgApi.Extensions;
+using RpgApi.Dto;
+using RpgApi.Services;
 
 namespace RpgApi.Controllers
 {
-    [Authorize(Roles="Jogador,Admin")]
+    [Authorize(Roles = "Jogador,Admin")]
     [ApiController]
     [Route("[controller]")]
     public class PersonagensController : ControllerBase
@@ -33,7 +35,7 @@ namespace RpgApi.Controllers
             {
                 Personagem p = await _context.TB_PERSONAGENS
                     .Include(ar => ar.Arma) //Inclui na propriedade Arma do objeto p  
-                    .Include(us => us.Usuario)                                                 
+                    .Include(us => us.Usuario)
                     .Include(ph => ph.PersonagemHabilidades)
                         .ThenInclude(h => h.Habilidade) ////Inclui na lista de PersonagemHabilidade de p                 
                     .FirstOrDefaultAsync(pBusca => pBusca.Id == id);
@@ -65,11 +67,11 @@ namespace RpgApi.Controllers
         {
             try
             {
-                if(novoPersonagem.PontosVida > 100)
+                if (novoPersonagem.PontosVida > 100)
                     throw new Exception("Pontos de vida não pode ser maior que 100");
 
-                 novoPersonagem.Usuario = _context
-                        .TB_USUARIOS.FirstOrDefault(uBusca => uBusca.Id == User.UsuarioId());
+                novoPersonagem.Usuario = _context
+                       .TB_USUARIOS.FirstOrDefault(uBusca => uBusca.Id == User.UsuarioId());
 
                 await _context.TB_PERSONAGENS.AddAsync(novoPersonagem);
                 await _context.SaveChangesAsync();
@@ -87,7 +89,7 @@ namespace RpgApi.Controllers
         {
             try
             {
-                if(novoPersonagem.PontosVida > 100)
+                if (novoPersonagem.PontosVida > 100)
                     throw new Exception("Pontos de vida não pode ser maior que 100");
 
                 novoPersonagem.Usuario = _context
@@ -126,10 +128,10 @@ namespace RpgApi.Controllers
         {
             try
             {
-               PersonagemHabilidade? phRemover = await _context.TB_PERSONAGENS_HABILIDADES
-                    .FirstOrDefaultAsync(phBusca => phBusca.PersonagemId == ph.PersonagemId
-                     && phBusca.HabilidadeId == ph.HabilidadeId);
-                if(phRemover == null)
+                PersonagemHabilidade? phRemover = await _context.TB_PERSONAGENS_HABILIDADES
+                     .FirstOrDefaultAsync(phBusca => phBusca.PersonagemId == ph.PersonagemId
+                      && phBusca.HabilidadeId == ph.HabilidadeId);
+                if (phRemover == null)
                     throw new System.Exception("Personagem ou Habilidade não encontrados");
 
                 _context.TB_PERSONAGENS_HABILIDADES.Remove(phRemover);
@@ -307,7 +309,7 @@ namespace RpgApi.Controllers
             try
             {
                 List<Personagem> lista = new List<Personagem>();
-                
+
                 if (User.UsuarioPerfil() == "Admin")
                     lista = await _context.TB_PERSONAGENS.ToListAsync();
                 else
@@ -321,7 +323,20 @@ namespace RpgApi.Controllers
             }
         }
 
-
+        [HttpGet("ListarPersonagens/{id}/{classeId}")]
+        public async Task<IActionResult> ListarPersonagensAsync(int id, int classeId)
+        {
+            try
+            {
+                PersonagensServices servico = new PersonagensServices(_context);
+                List<PersonagemDto> lista = await servico.ListarPersonagens(id, classeId);
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message + " - " + ex.InnerException);
+            }
+        }
 
 
 
